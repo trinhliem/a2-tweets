@@ -11,15 +11,15 @@ class Tweet {
     get source():string {
         //TODO: identify whether the source is a live event, an achievement, a completed event, or miscellaneous.
         const textLower = this.text.toLowerCase(); // convert to lowercase
-        if (textLower.startsWith("Just completed") || textLower.includes("completed")) {
+        if (textLower.startsWith("just completed") || textLower.includes("completed")) {
             return "completed_event";
         }
 
-        if (textLower.startsWith("Achieved a new personal record") ) {
+        if (textLower.startsWith("achieved a new personal record") ) {
             return "achievement";
         }
 
-        if (textLower.startsWith("Watch my run")) {
+        if (textLower.startsWith("watch my run")) {
             return "live_event";
         }
 
@@ -37,19 +37,19 @@ class Tweet {
         //TODO: parse the written text from the tweet
         const textLower = this.text.toLowerCase();
 
-        const hashTag = /#Runkeeper/g;
+        const hashTag = /#runkeeper/g;
         const linkText = /https:\/\/t\.co\/\S+/g;
 
         let textStripped = textLower.replace(hashTag, "").replace(linkText, "");
 
-        const completedpostedRegex = /Just (?:completed|posted) a .+? (?:with @Runkeeper\. Check it out!| - )/i;
-        const liveRegex = /Watch my .+? right now with @Runkeepeer Live /i;
-        const achievementRegex = /Achieved a .+? with #Runkeeer:/i;
-        textStripped = textStripped.replace(completedpostedRegex, "")
+        const completedPostedRegex = /just (?:completed|posted) a [\s\S]+? (?:with @runkeeper\. check it out!|-)/i;
+        const liveRegex = /watch my .+? right now with @runkeepeer live /i;
+        const achievementRegex = /achieved a .+? with #runkeeer:/i;
+        textStripped = textStripped.replace(completedPostedRegex, "")
             .replace(liveRegex, "")
             .replace(achievementRegex,"")
             .replace(/^-|-$/g, "").trim();
-
+        console.log(textStripped);
         return textStripped;
     }
 
@@ -89,11 +89,9 @@ class Tweet {
         const activity = this.activityType
         const clickableText = this.text.replace(/https:\/\/t\.co\/\S+/g, "<a href='$&'>$&</a>");
 
-        const htmlString = `<tr>
+        return `<tr>
             <td>${rowNumber}</td>
             <td>${activity}</td>
-            <td>${clickableText}</td>`
-
-        return htmlString;
+            <td>${clickableText}</td>`;
     }
 }
