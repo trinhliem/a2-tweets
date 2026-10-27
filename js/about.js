@@ -38,7 +38,7 @@ function parseTweets(runkeeper_tweets) {
 	document.getElementById('firstDate').innerText = firstDate;
 	document.getElementById('lastDate').innerText = lastDate;
 
-	// there are multiple instances of the class completedEvents
+	// there are multiple instances of the class completedEvents, so we use querySelectorAll
 	document.querySelectorAll('.completedEvents').forEach(element => element.innerText = completedEvents.length);
 	document.querySelector('.liveEvents').innerText = liveEvents.length;
 	document.querySelector('.achievements').innerText = achievements.length;

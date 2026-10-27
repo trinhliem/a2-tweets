@@ -54,12 +54,10 @@ class Tweet {
     }
 
     get activityType():string {
-        if (this.source != 'completed_event') {
-            return "unknown";
-        }
-        //TODO: parse the activity type from the text of the tweet
-        const activityRegex =  /Just (?:completed|posted) a [\d\.]+ (?:km|mi) (.+?) (?:with @Runkeeper\. Check it out!|-)/i;
-        const matchArray = this.text.match(activityRegex);
+
+        const textLower = this.text.toLowerCase();
+        const activityRegex =  /just (?:completed|posted) a [\d\.]+ (?:km|mi) (.+?) (?:with @runkeeper\. check it out!|-)/i;
+        const matchArray = textLower.match(activityRegex);
         if (matchArray) {
             return matchArray[1];
         }
@@ -67,10 +65,7 @@ class Tweet {
     }
 
     get distance():number {
-        if(this.source != 'completed_event') {
-            return 0;
-        }
-        //TODO: prase the distance from the text of the tweet
+
         const distanceRegex = /(\d+\.\d+)\s+(mi|km)/i;
 
         const matchArray = this.text.match(distanceRegex);

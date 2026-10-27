@@ -77,7 +77,6 @@ function parseTweets(runkeeper_tweets) {
 	  "data": {
 	    "values": tweet_array
 	  },
-	  //TODO: Add mark and encoding
 		"mark": "bar",
 		"encoding": {
 		  "x": {
@@ -145,7 +144,7 @@ function parseTweets(runkeeper_tweets) {
 				}
 			},
 			{
-				"transform": [
+				"transform": [  // erase all points and start over (helps scale the axis nicely)
 					{ "filter": "showMeans == true" }
 				],
 				"mark": "point",
