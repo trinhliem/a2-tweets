@@ -58,7 +58,7 @@ class Tweet {
             return "unknown";
         }
         //TODO: parse the activity type from the text of the tweet
-        const activityRegex =  /Just (?:completed|posted) a (.+?) (?:with @Runkeeper\. Check it out!| - )/i;
+        const activityRegex =  /Just (?:completed|posted) a [\d\.]+ (?:km|mi) (.+?) (?:with @Runkeeper\. Check it out!|-)/i;
         const matchArray = this.text.match(activityRegex);
         if (matchArray) {
             return matchArray[1];
@@ -91,7 +91,7 @@ class Tweet {
 
         return `<tr>
             <td>${rowNumber}</td>
-            <td>${activity}</td>
+            <td>${this.activityType}</td>
             <td>${clickableText}</td>`;
     }
 }
